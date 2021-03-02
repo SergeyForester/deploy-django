@@ -11,6 +11,7 @@ check_root
 APPNAME=$1
 DOMAINNAME=$2
 PYTHON_VERSION=$3
+MODULES=$4
 
 # check appname was supplied as argument
 if [ "$APPNAME" == "" ] || [ "$DOMAINNAME" == "" ]; then
@@ -159,6 +160,8 @@ export DJANGO_SETTINGS_MODULE=$APPNAME.settings # settings file for the app
 export PYTHONPATH=\$DJANGODIR:\$PYTHONPATH
 export SECRET_KEY=`cat $APPFOLDERPATH/.django_secret_key`
 export DB_PASSWORD=`cat $APPFOLDERPATH/.django_db_password`
+export HOST =`http://$DOMAINNAME`
+export MODULES =`$MODULES`
 
 cd $APPFOLDERPATH
 source ./bin/activate
@@ -220,12 +223,13 @@ chmod u+x $APPFOLDERPATH/gunicorn_start.sh
 # Create the PostgreSQL database and associated role for the app
 # Database and role name would be the same as the <appname> argument
 # ###################################################################
-echo "Creating PostgreSQL role '$APPNAME'..."
-su postgres -c "createuser -S -D -R -w $APPNAME"
-echo "Changing password of database role..."
-su postgres -c "psql -c \"ALTER USER $APPNAME WITH PASSWORD '$DBPASSWORD';\""
-echo "Creating PostgreSQL database '$APPNAME'..."
-su postgres -c "createdb --owner $APPNAME $APPNAME"
+
+#echo "Creating PostgreSQL role '$APPNAME'..."
+#su postgres -c "createuser -S -D -R -w $APPNAME"
+#echo "Changing password of database role..."
+#su postgres -c "psql -c \"ALTER USER $APPNAME WITH PASSWORD '$DBPASSWORD';\""
+#echo "Creating PostgreSQL database '$APPNAME'..."
+#su postgres -c "createdb --owner $APPNAME $APPNAME"
 
 # ###################################################################
 # Create nginx template in $APPFOLDERPATH/nginx
