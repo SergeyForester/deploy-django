@@ -78,7 +78,7 @@ chmod g+x $APPFOLDERPATH || error_exit "Error setting group execute flag"
 
 # install python virtualenv in the APPFOLDER
 echo "Creating environment setup for django app..."
-if [ "$PYTHON_VERSION" == "3" ]; then
+if [[ "$PYTHON_VERSION" == "3" ]]; then
 su -l $APPNAME << 'EOF'
 pwd
 echo "Setting up python virtualenv..."
