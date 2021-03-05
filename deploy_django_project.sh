@@ -160,8 +160,8 @@ export DJANGO_SETTINGS_MODULE=$APPNAME.settings # settings file for the app
 export PYTHONPATH=\$DJANGODIR:\$PYTHONPATH
 export SECRET_KEY=`cat $APPFOLDERPATH/.django_secret_key`
 export DB_PASSWORD=`cat $APPFOLDERPATH/.django_db_password`
-export HOST =`http://$DOMAINNAME`
-export MODULES =`$MODULES`
+export HOST=http://$DOMAINNAME
+export MODULES=$MODULES
 
 cd $APPFOLDERPATH
 source ./bin/activate
